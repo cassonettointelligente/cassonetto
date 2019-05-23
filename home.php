@@ -1,7 +1,7 @@
 <?php
+	include "db.php"; 
 	session_start();
 	ob_start();
-$sqlconn = mysqli_connect("localhost", "pi", "superuserboom", "cassonetto");
 	if (isset($_SESSION['rfid'])) {
 		$rfid = $_SESSION['rfid'];
 	}

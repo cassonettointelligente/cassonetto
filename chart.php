@@ -1,4 +1,7 @@
 <?php
+
+include "db.php";
+
 session_start();
 $json = file_get_contents('php://input');
 $values = json_decode($json, true);

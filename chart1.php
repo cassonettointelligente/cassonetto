@@ -1,4 +1,6 @@
 <?php
+include "db.php";
+
 session_start();
 $json = file_get_contents('php://input');
 $values = json_decode($json, true);
@@ -16,8 +18,6 @@ $ris_finale = array("metallo" => array(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0
                     "carta" => array(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0),
                     "raee" => array(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
                     );
-
-$sqlconn = mysqli_connect("localhost", "pi", "superuserboom", "cassonetto");
 
 for($day = 1; $day<31; $day++){
 

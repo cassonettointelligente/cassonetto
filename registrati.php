@@ -1,7 +1,7 @@
 <?php
+	include "db.php"; 
 	session_start();
 	ob_start();
-$sqlconn = mysqli_connect("localhost", "pi", "superuserboom", "cassonetto");
 ?>
 <!DOCTYPE HTML PUBLIC="-//W3C//DTD HTML 4.0//EN">
 <HTML>

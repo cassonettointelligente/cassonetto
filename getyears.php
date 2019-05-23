@@ -1,9 +1,10 @@
 <?php
+
+include "db.php"; 
+
 session_start();
 
 $rfid = $_SESSION['rfid'];
-
-$sqlconn = mysqli_connect("localhost", "pi", "superuserboom", "cassonetto");
 
 $years = array();
 
