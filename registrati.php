@@ -140,7 +140,7 @@
 							$errori['dati'] = "Il campo rfid deve essere un numero intero positivo.";
 						}else{
 							$queryverificadisonibilita = "SELECT * FROM utente WHERE rfid = '$rfid'";
-							$risultativerifica = mysqli_query($db,$queryverificadisonibilita);
+							$risultativerifica = mysqli_query($sqlconn,$queryverificadisonibilita);
 							if (mysqli_num_rows($risultativerifica) == 0) {
 								if (isset($_POST['btn'])) {
 									$nome = $_POST['nome'];
@@ -164,7 +164,7 @@
 												$sesso = $_POST['sesso'];
 												$datadinascita = $_POST['datadinascita'];
 												$emailquery = "SELECT * FROM utente WHERE email = '$email'";
-												$results = mysqli_query($db,$emailquery);
+												$results = mysqli_query($sqlconn,$emailquery);
 												$righe = mysqli_num_rows($results);
 												if ($righe != 0) {
 													$errori['email'] = "Email già registrata";
@@ -221,7 +221,7 @@
 					$password = md5($password);
 
 					$sql = "INSERT INTO utente(rfid,nome,cognome,email,psswd,sesso,data_di_nascita,codice_fiscale,citta,provincia,cap,via_e_numero_civico) VALUES ('$rfid','$nome','$cognome','$email','$password','$sesso','$datadinascita','$codfis','$citta','$provincia','$cap','$indirizzo')";
-					if (mysqli_query($db, $sql)) {			
+					if (mysqli_query($sqlconn, $sql)) {			
 						$_SESSION['rfid'] = $rfid;
 						header('Location: home.php');
 					}

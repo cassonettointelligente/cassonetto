@@ -19,8 +19,6 @@ $ris_finale = array("metallo" => array(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0
                     "raee" => array(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
                     );
 
-$sqlconn = mysqli_connect("localhost", "pi", "superuserboom", "cassonetto");
-
 for($mese = 1; $mese<13; $mese++){
 
         $query = "select tipo_di_rifiuto from operazione where extract(month from giorno_e_ora) = $mese and extract(year from giorno_e_ora) = $anno and rfid_utente = '$rfid';";

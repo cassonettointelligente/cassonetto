@@ -12,116 +12,12 @@
 	<link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
     <script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 	<title>Home</title>
-	<style>
-		header{
-			width: 100%;
-			height: 70px;
-			padding-top: 20px;
-			background-color: #2795a0;
-		}
-		footer{
-			width: 100%;
-			height: 200px;
-			background-color: #2795a0;
-		}
-		body{
-			background-color: #dbdbdb;
-			user-select: none;
-			overflow-x: hidden;
-		}
-		/* width */
-		::-webkit-scrollbar {
-			width: 8px;
-		}
-		/* Track */
-		::-webkit-scrollbar-track {
-			background: #f1f1f1; 
-		}
-		/* Handle */
-		::-webkit-scrollbar-thumb {
-			background: #888; 
-		}
-		/* Handle on hover */
-		::-webkit-scrollbar-thumb:hover {
-			background: #555; 
-		}
-		.dispositivoinput{
-		    padding-top: 0.1px;
-		    padding-bottom: 0.1px;
-		    text-align: left;
-		    margin-left: 1px;
-		    width: 99%;
-		    border-left: 3px #1ddc0d solid;
-		    transition: all 0.1s;
-		    text-decoration: none;
-		    height: 50px
-		}
-
-		.dispositivoinput p{
-		    margin-left: 30px;
-		    font-size: 14px;
-		    color: black;
-		    font-family: titillium web;
-		}
-
-		.dispositivoinput:hover{
-		    border-left: 4px #2bcc1d solid;
-		    background-color: #f0f0f0;
-		    cursor: pointer;
-		}
-		.button {
-			outline: none;
-			float: right;
-			padding: 6px 10px;
-			margin-right: 150px;
-			margin-top: 10px;
-			background-color: #00b999;
-			color: #f0f0f0;
-			font-size: 16px;
-			border: none;
-			cursor: pointer;
-			border-radius: 3px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
-			transition: all 0.2s
-		}
-		.button:active{
-			transform: translateY(2px);
-			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09), 0 3px 10px 0 rgba(0, 0, 0, 0.06);
-		}
-		.button:hover {
-			background-color: #00a88b;
-		}
-		.inserimentodatidiaccesso{
-			padding: 7px 10px;
-			margin-top: 10px;
-			font-size: 14px;
-			border: none;
-			float: right;
-			margin-right: 5px;
-			width: 160px;
-			outline: none
-		}
-		#filtra{
-			width: 80px;
-			padding: 2.5px;
-			background-color: #f5f5f5;
-			border-radius: 5px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.06), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
-			display: inline-block;
-			transition: 0.2s;
-			float: right;
-			margin-right: 30px;
-			border: 1px #e7e7e7 solid;
-			margin-top: 2.5px;
-		}
-		#filtra:active{
-			transform: translateY(2px);
-			box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.09), 0 5px 14px 0 rgba(0, 0, 0, 0.11)
-		}
-	</style>
+	
 </head>
 <body>
 	<header>

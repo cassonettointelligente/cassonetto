@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<title>Home</title>
+
+		<script>
+			$(document).ready(function() {
+	            //option A
+	            $("form").submit(function(e){
+	                alert('submit intercepted');
+	                e.preventDefault(e);
+	            });
+	        });
+		    
+			function stage1(){
+				$('button[name=Btn_Accedi]').click(function(){
+					var json_username = $('input[name=username]').val();
+					var json_password = md5($('input[name=pswd]').val());
+
+					$.post( "login.php", JSON.stringify({ "username": json_username, "passord": json_password }))
+					.done(function(result){
+						result = JSON.parse(result);
+						switch(result["status"]){
+							case "success":
+								Cookies.set('session_id', response["session_id"], { expires: 365 });
+								stage2();
+								break;
+
+							case "error":
+								switch(result["error"]){
+									case "username_wrong":
+										$("#error_box").css('visibility', 'visible');
+										$("#error_box").val(json_password + " doesn't exist.")
+
+									case "password_wrong":
+										$("#error_box").css('visibility', 'visible');
+										$("#error_box").val(json_password + " is incorrent.")
+
+									default:
+										break;
+								}
+
+							default:
+								break;
+						}
+					});
+				});
+			}
+			
+		</script>
+
+	</head>
+	<body>
+		<header>
+			<!-- LOGO -->
+			<div style="width: 200px;height: 50px;margin-left: 100px;float: left;">
+				<p style="font-size: 35px;font-family: lobster;margin: 0px;display: inline-block;"><a href="home.php" style="color: white;text-decoration: none">Cassonetto</a></p>
+			</div>
+			<div id="login_form" style=" display: inline-block; float: right;margin-right: -100px">
+				<form>
+					<button class="button" name="Btn_Accedi">Login</button>
+					<input class="inserimentodatidiaccesso" style="margin-right: 15px" type="password" placeholder="Password" name="pswd">
+					<input class="inserimentodatidiaccesso" type="text" placeholder="Username" name="username" value="">
+				</form>
+				<br>
+				<div id="error_box" style="padding: 2px 10px 2px 10px;margin-bottom: 0px;background-color: lightgrey;border-radius: 3px;float: left;margin-top: 5px; visibility:hidden">
+						<p style="margin: 0px;color: black;font-size: 11px;font-family: titillium web;font-weight: 600">Inserisci entrambi i dati</p>
+				</div>
+				
+				<div style="font-size: 11px; color: lightgrey;margin-top: 10px;font-family: arial;float: right;margin-right: 160px">non sei registrato? <span><a href="registrati.php" style="text-decoration: none;color: white">Registrati!</a> </span>
+			</div>
+		</div>
+	</header>
+	<div style="width: 100%;text-align: center;user-select: none">
+		<div style="width: 950px;margin: auto;margin-top: 50px">
+			<div id="icone">
+			</div>
+			
+		</div>
+	</div>
+	<div style="width: 100%;margin-top: 70px;margin-bottom: 100px">
+		<div id="contenitoregenerale">
+			<div id="titolohome">
+				<p style="font-family: staatliches;color: white;font-size: 25px;margin: 0px;">HOME</p>
+			</div>
+			
+			
+		</div>
+	</div>
+	<script>
+		function RotazioneImpostazioni(x) {
+			x.classList.toggle("change");
+		}
+		function Account(x){
+			var panel = document.getElementById(x);
+			if(panel.style.height == "67px"){
+				panel.style.height = "0px";
+			}else{
+				panel.style.height = "67px";
+			}
+		}
+		function Impostazioni(x){
+			var panel = document.getElementById(x);
+			if(panel.style.height == "41px"){
+				panel.style.height = "0px";
+			}else{
+				panel.style.height = "41px";
+			}
+		}
+	</script>
+</body>
+</html>
