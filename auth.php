@@ -42,7 +42,7 @@
 		$id_cassonetto = $values["id_cassonetto"];
 		$rfid_utente = $values["rfid_utente"];
 		$valore_ph = $values["valore_ph"];
-		$queryinserimento = "INSERT INTO operazione(peso,rfid_cassonetto,rfid_utente,tipo_di_rifiuto,valore_ph) values($peso,$id_cassonetto,$rfid_utente,$tipo_di_rifiuto,$valore_ph)";
+		$queryinserimento = "INSERT INTO operazione(peso,id_cassonetto,rfid_utente,tipo_di_rifiuto,valore_ph) values($peso,$id_cassonetto,$rfid_utente,$tipo_di_rifiuto,$valore_ph)";
 		if (mysqli_query($sqlconn,$queryinserimento)) {
 		}
 	}
