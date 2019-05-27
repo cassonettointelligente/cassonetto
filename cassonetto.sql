@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 12, 2019 alle 21:50
+-- Creato il: Mag 27, 2019 alle 13:45
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 5.6.40
 
@@ -25,16 +25,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `azioni_cassonetto`
+--
+
+CREATE TABLE `azioni_cassonetto` (
+  `azione` varchar(50) DEFAULT NULL,
+  `id_cassonetto` int(11) DEFAULT NULL,
+  `data_e_ora` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `cassonetto`
 --
 
 CREATE TABLE `cassonetto` (
-  `rfid_cassonetto` varchar(10) NOT NULL,
-  `coordinata_x` float DEFAULT NULL,
-  `coordinata_y` float DEFAULT NULL,
-  `percentuale_riempimento` int(11) DEFAULT NULL,
-  `disponibilita_di_servizio` varchar(1) DEFAULT NULL
+  `id_cassonetto` int(11) NOT NULL,
+  `citta` varchar(255) DEFAULT NULL,
+  `provincia` varchar(255) DEFAULT NULL,
+  `via` varchar(255) DEFAULT NULL,
+  `cap` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `cassonetto`
+--
+
+INSERT INTO `cassonetto` (`id_cassonetto`, `citta`, `provincia`, `via`, `cap`) VALUES
+(1, 'Crispiano', 'Taranto', 'Via Fausto Coppi', '74012');
 
 -- --------------------------------------------------------
 
@@ -46,35 +65,38 @@ CREATE TABLE `operazione` (
   `id_operazione` int(11) NOT NULL,
   `giorno_e_ora` datetime DEFAULT CURRENT_TIMESTAMP,
   `rfid_utente` varchar(2000) DEFAULT NULL,
-  `rfid_cassonetto` varchar(2000) DEFAULT NULL,
+  `id_cassonetto` varchar(2000) DEFAULT NULL,
   `tipo_di_rifiuto` varchar(50) DEFAULT NULL,
-  `peso` float DEFAULT NULL,
-  `gas1` float DEFAULT NULL,
-  `gas2` float DEFAULT NULL,
-  `gas3` float DEFAULT NULL
+  `peso` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `operazione`
 --
 
-INSERT INTO `operazione` (`id_operazione`, `giorno_e_ora`, `rfid_utente`, `rfid_cassonetto`, `tipo_di_rifiuto`, `peso`, `gas1`, `gas2`, `gas3`) VALUES
-(5, '2019-04-03 17:18:37', '123456', '1', 'metallo', 1.5, NULL, NULL, NULL),
-(6, '2019-04-03 17:18:37', '123456', '1', 'vetro', 2, NULL, NULL, NULL),
-(7, '2019-04-03 17:26:14', '123456', '1', 'indifferenziato', 1, NULL, NULL, NULL),
-(8, '2019-04-03 17:26:14', '123456', '1', 'umido', 3, NULL, NULL, NULL),
-(9, '2019-04-03 17:26:14', '123456', '1', 'plastica', 1, NULL, NULL, NULL),
-(10, '2019-04-11 16:08:06', '123456', '1', 'plastica', 2, NULL, NULL, NULL);
+INSERT INTO `operazione` (`id_operazione`, `giorno_e_ora`, `rfid_utente`, `id_cassonetto`, `tipo_di_rifiuto`, `peso`) VALUES
+(5, '2019-04-03 17:18:37', '123456', '1', 'metallo', 1.5),
+(6, '2019-04-03 17:18:37', '123456', '1', 'vetro', 2),
+(7, '2019-04-03 17:26:14', '123456', '1', 'indifferenziato', 1),
+(8, '2019-04-03 17:26:14', '123456', '1', 'umido', 3),
+(9, '2019-04-03 17:26:14', '123456', '1', 'plastica', 1),
+(10, '2019-04-11 16:08:06', '123456', '1', 'plastica', 2),
+(12, '2019-04-26 13:08:06', '123456', '1', 'umido', 2.5),
+(13, '2018-10-10 12:17:13', '123456', '1', 'indifferenziato', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tabella_di_servizio`
+-- Struttura della tabella `sanzione`
 --
 
-CREATE TABLE `tabella_di_servizio` (
-  `id_inserimento` int(11) NOT NULL,
-  `email_servizio_clienti` varchar(50) DEFAULT NULL
+CREATE TABLE `sanzione` (
+  `id_sanzione` int(11) NOT NULL,
+  `data_e_ora` datetime DEFAULT CURRENT_TIMESTAMP,
+  `rfid_utente` int(11) DEFAULT NULL,
+  `titolo_sanzione` varchar(255) DEFAULT NULL,
+  `corpo_sanzione` varchar(1000) DEFAULT NULL,
+  `punteggio_rimosso` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -86,6 +108,7 @@ CREATE TABLE `tabella_di_servizio` (
 CREATE TABLE `utente` (
   `rfid` int(11) NOT NULL,
   `totale_punti_accumulati` int(11) NOT NULL,
+  `cliente_dipendente` int(11) DEFAULT NULL,
   `nome` varchar(255) DEFAULT NULL,
   `cognome` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -103,8 +126,8 @@ CREATE TABLE `utente` (
 -- Dump dei dati per la tabella `utente`
 --
 
-INSERT INTO `utente` (`rfid`, `totale_punti_accumulati`, `nome`, `cognome`, `email`, `psswd`, `sesso`, `data_di_nascita`, `codice_fiscale`, `citta`, `provincia`, `cap`, `via_e_numero_civico`) VALUES
-(123456, 0, 'Simone', 'Villanova', 'simone1villanova@hotmail.com', '1a1b66188ca9fe149aa18581884ca28c', 'M', '1999-10-15', 'VLLSMN99R15E986S', 'crispiano', 'taranto', '74012', 'Via Fausto Coppi 4');
+INSERT INTO `utente` (`rfid`, `totale_punti_accumulati`, `cliente_dipendente`, `nome`, `cognome`, `email`, `psswd`, `sesso`, `data_di_nascita`, `codice_fiscale`, `citta`, `provincia`, `cap`, `via_e_numero_civico`) VALUES
+(123456, 0, 1, 'Simone', 'Villanova', 'simone1villanova@hotmail.com', '1a1b66188ca9fe149aa18581884ca28c', 'M', '1999-10-15', 'VLLSMN99R15E986S', 'crispiano', 'taranto', '74012', 'Via Fausto Coppi 4');
 
 --
 -- Indici per le tabelle scaricate
@@ -114,7 +137,7 @@ INSERT INTO `utente` (`rfid`, `totale_punti_accumulati`, `nome`, `cognome`, `ema
 -- Indici per le tabelle `cassonetto`
 --
 ALTER TABLE `cassonetto`
-  ADD PRIMARY KEY (`rfid_cassonetto`);
+  ADD PRIMARY KEY (`id_cassonetto`);
 
 --
 -- Indici per le tabelle `operazione`
@@ -123,10 +146,10 @@ ALTER TABLE `operazione`
   ADD PRIMARY KEY (`id_operazione`);
 
 --
--- Indici per le tabelle `tabella_di_servizio`
+-- Indici per le tabelle `sanzione`
 --
-ALTER TABLE `tabella_di_servizio`
-  ADD PRIMARY KEY (`id_inserimento`);
+ALTER TABLE `sanzione`
+  ADD PRIMARY KEY (`id_sanzione`);
 
 --
 -- Indici per le tabelle `utente`
@@ -142,13 +165,13 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `operazione`
 --
 ALTER TABLE `operazione`
-  MODIFY `id_operazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_operazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT per la tabella `tabella_di_servizio`
+-- AUTO_INCREMENT per la tabella `sanzione`
 --
-ALTER TABLE `tabella_di_servizio`
-  MODIFY `id_inserimento` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sanzione`
+  MODIFY `id_sanzione` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
