@@ -44,5 +44,29 @@
 		if (mysqli_query($sqlconn,$queryinserimento)) {
 		}
 	}
+
+	if (isset($values["incendio"])) {
+		if ($values["incendio"] == 1) {
+			$incendio = "Inizio incendio.";
+		}else{
+			$incendio = "Fine incendio.";
+		}
+		$id_cassonetto = $values["id_cassonetto"];
+		$queryinserimento = "INSERT into azioni_cassonetto(azione,id_cassonetto) VALUES($incendio,$id_cassonetto)";
+		if (mysqli_query($sqlconn,$queryinserimento)) {
+		}
+	}
+
+	if (isset($values["sospensione"])) {
+		if ($values["sospensione"] == 1) {
+			$incendio = "Inizio sospensione.";
+		}else{
+			$incendio = "Fine sospensione.";
+		}
+		$id_cassonetto = $values["id_cassonetto"];
+		$queryinserimento = "INSERT into azioni_cassonetto(azione,id_cassonetto) VALUES($sospensione,$id_cassonetto)";
+		if (mysqli_query($sqlconn,$queryinserimento)) {
+		}
+	}
 	
 ?>
