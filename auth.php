@@ -5,7 +5,8 @@
 
 
 
-	if (isset($values["rfid"]) and isset($values["id_cassonetto"]) and !isset($values["tipo_di_rifiuto"])) {
+	# VALIDAZIONE DELL'UTENTE E DEL CASSONETTO
+	if (isset($values["rfid"]) and !isset($values["tipo_di_rifiuto"])) {
 		$rfid = $values["rfid"];
 		$id_cassonetto = $values["id_cassonetto"];
 		$query = "SELECT * FROM utente WHERE rfid = '$rfid'";
@@ -34,6 +35,7 @@
 		}
 	}
 
+	# INSERIMENTO DELL'OPERAZIONE
 	if (isset($values["tipo_di_rifiuto"])) {
 		$tipo_di_rifiuto = $values["tipo_di_rifiuto"];
 		$peso = $values["peso"];
@@ -45,6 +47,7 @@
 		}
 	}
 
+	# AGGIORNAMENTO SULLO STATO DI INCENDIO
 	if (isset($values["incendio"])) {
 		if ($values["incendio"] == 1) {
 			$incendio = "Inizio incendio.";
@@ -57,6 +60,7 @@
 		}
 	}
 
+	# AGGIORNAMENTO SULLO STATO DI SOSPENSIONE
 	if (isset($values["sospensione"])) {
 		if ($values["sospensione"] == 1) {
 			$incendio = "Inizio sospensione.";
