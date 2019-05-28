@@ -179,9 +179,6 @@
 			
 				<?php
 					if (isset($rfid)) {?>
-						<div style="width: 94%;height: 300px;border-bottom: 2px solid lightgrey;margin: auto;">
-							
-						</div>
 						<div style="width: 500px;margin: 5px 15px 0px 5px;display: inline-block;vertical-align: top;transform: scale(0.9);">
 				<?php
 							$queryprendidati="SELECT * FROM operazione WHERE rfid_utente='$rfid' order by giorno_e_ora desc";
