@@ -132,12 +132,8 @@
 						$errori['dati'] = "Campo rfid non valido.";
 					}else{
 						$rfid = str_replace(' ', '', $rfid);
-						if (strlen($rfid)!= 6) {
+						if (strlen($rfid)!= 8 ) {
 							$errori['dati'] = "Lunghezza rfid non valida.";
-						}elseif(!filter_var($rfid,FILTER_VALIDATE_INT)){
-							$errori['dati'] = "Il campo rfid deve essere un numero intero.";
-						}elseif($rfid<0){
-							$errori['dati'] = "Il campo rfid deve essere un numero intero positivo.";
 						}else{
 							$queryverificadisonibilita = "SELECT * FROM utente WHERE rfid = '$rfid'";
 							$risultativerifica = mysqli_query($sqlconn,$queryverificadisonibilita);
